@@ -29,3 +29,4 @@ class Pool(Base):
     # Liên kết hồ bơi này với người sở hữu nó
     owner_id = Column(Integer, ForeignKey("users.id"))
     owner = relationship("User", back_populates="pools")
+    bookings = relationship("Booking", back_populates="pool")

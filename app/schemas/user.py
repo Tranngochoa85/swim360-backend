@@ -31,3 +31,6 @@ class Token(BaseModel):
 
 class TokenData(BaseModel):
     email: Union[str, None] = None
+# Schema dùng khi Admin cập nhật role
+class UserRoleUpdate(BaseModel):
+    role: UserRole
