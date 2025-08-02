@@ -16,3 +16,8 @@ def create_user(db: Session, user: schemas.UserCreate):
     db.commit()
     db.refresh(db_user)
     return db_user
+def get_transactions(db: Session, skip: int = 0, limit: int = 100):
+    """
+    Lấy danh sách tất cả các giao dịch.
+    """
+    return db.query(models.Transaction).offset(skip).limit(limit).all()
