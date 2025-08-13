@@ -30,3 +30,5 @@ class User(Base):
     # Mối quan hệ với Bookings
     bookings_as_learner = relationship("Booking", foreign_keys="[Booking.learner_id]", back_populates="learner")
     bookings_as_coach = relationship("Booking", foreign_keys="[Booking.coach_id]", back_populates="coach")
+    coach_profile = relationship("CoachProfile", back_populates="user", uselist=False, cascade="all, delete-orphan")
+documents = relationship("Document", back_populates="user", cascade="all, delete-orphan")

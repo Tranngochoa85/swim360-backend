@@ -1,3 +1,4 @@
+from .api.v1 import coaches as coaches_router
 from fastapi import FastAPI
 from fastapi.middleware.cors import CORSMiddleware
 from . import models
@@ -32,7 +33,7 @@ app.include_router(auth_router.router, prefix="/auth", tags=["Auth"]) # Đổi /
 app.include_router(pools_router.router, prefix="/pools", tags=["Pools"])
 app.include_router(bookings_router.router, prefix="/bookings", tags=["Bookings"])
 app.include_router(admin_router.router, prefix="/admin", tags=["Admin"])
-
+app.include_router(coaches_router.router, prefix="/coaches", tags=["Coaches"])
 
 @app.get("/")
 def read_root():

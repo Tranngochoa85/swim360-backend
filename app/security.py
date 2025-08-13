@@ -58,3 +58,10 @@ def get_current_active_admin(current_user: models.User = Depends(get_current_use
     if current_user.role != models.UserRole.ADMIN:
         raise HTTPException(status_code=403, detail="Forbidden: Not an admin user")
     return current_user
+def get_current_active_coach(current_user: models.User = Depends(get_current_user)):
+    """
+    Kiểm tra xem người dùng hiện tại có phải là HLV không.
+    """
+    if current_user.role != models.UserRole.COACH:
+        raise HTTPException(status_code=403, detail="Forbidden: Not a coach user")
+    return current_user
