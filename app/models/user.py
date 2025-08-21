@@ -1,4 +1,4 @@
-from sqlalchemy import Column, Integer, String, DateTime, func, Enum as SQLAlchemyEnum, ForeignKey
+from sqlalchemy import Column, Integer, String, DateTime, func, Enum as SQLAlchemyEnum
 from sqlalchemy.orm import relationship
 from app.database import Base
 import enum
@@ -25,10 +25,9 @@ class User(Base):
     goal = Column(SQLAlchemyEnum(UserGoal), nullable=True, default=UserGoal.LEARN_TO_SWIM)
     created_at = Column(DateTime(timezone=True), server_default=func.now())
 
+    # Mối quan hệ với các bảng khác
     pools = relationship("Pool", back_populates="owner", cascade="all, delete-orphan")
-    
-    # Mối quan hệ với Bookings
+    coach_profile = relationship("CoachProfile", back_populates="user", uselist=False, cascade="all, delete-orphan")
+    documents = relationship("Document", back_populates="user", cascade="all, delete-orphan")
     bookings_as_learner = relationship("Booking", foreign_keys="[Booking.learner_id]", back_populates="learner")
     bookings_as_coach = relationship("Booking", foreign_keys="[Booking.coach_id]", back_populates="coach")
-    coach_profile = relationship("CoachProfile", back_populates="user", uselist=False, cascade="all, delete-orphan")
-documents = relationship("Document", back_populates="user", cascade="all, delete-orphan")
